@@ -1,3 +1,4 @@
 rootProject.name='AppGallery'
 include ':app'
 include ':domain'
+include ':data-adapter'

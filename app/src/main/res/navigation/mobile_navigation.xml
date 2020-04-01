@@ -7,8 +7,49 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="fr.cedriccreusot.appgallery.ui.home.HomeFragment"
+        android:name="fr.cedriccreusot.appgallery.gallery.GalleryFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="fr.cedriccreusot.appgallery.detail.DetailActivity"
+        android:label="DetailActivity" >
+        <argument
+            android:name="photoId"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="ownerUsername"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="photoDescription"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="photoDate"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="photoUrl"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="ownerProfilePhotoUrl"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="photoColor"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="ownerFullName"
+            app:argType="string"
+            android:defaultValue='""' />
+    </activity>
 
 </navigation>

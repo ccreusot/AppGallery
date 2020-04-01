@@ -7,8 +7,16 @@ object DataMock {
     fun photo(photoId: Int, userId: Int): Photo = Photo(
         id = "id$photoId",
         description = "description$photoId",
-        urlPhoto = "url$photoId",
+        date = "date",
+        color = "color",
+        smallPhoto = "url$photoId",
+        regularPhoto = "url$photoId",
         collections = emptyList(),
-        user = UserPhoto(id = "id$userId", userName = "userName$userId")
+        user = UserPhoto(
+            id = "id$userId",
+            userName = "userName$userId",
+            fullName = "fullName$userId",
+            profilePhotoUrl = "profilePhotoUrl$userId"
+        )
     )
 }

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:loading="http://schemas.android.com/apk/res-auto"
+    xmlns:photo="http://schemas.android.com/apk/res-auto"
+    xmlns:gallery="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="fr.cedriccreusot.appgallery.detail.viewmodel.DetailViewModel" />
+
+        <variable
+            name="router"
+            type="fr.cedriccreusot.appgallery.router.NavigationRouter" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="match_parent"
+                android:layout_height="398dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                photo:src="@{viewModel.photoUrl}" />
+
+            <LinearLayout
+                android:id="@+id/ownerLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dividerColor"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/regular_margin"
+                android:paddingEnd="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/regular_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="@dimen/regular_margin"
+                    app:shapeAppearanceOverlay="@style/CircularShapeAppearance"
+                    photo:src="@{viewModel.userProfilePhoto}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:text="@{@string/detail_by_username(viewModel.userFullName)}"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/regular_margin"
+                    android:layout_marginEnd="@dimen/regular_margin"
+                    app:srcCompat="@drawable/ic_empty_heart" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/regular_margin"
+                    android:layout_marginEnd="@dimen/regular_margin"
+                    app:srcCompat="@drawable/ic_empty_bookmark" />
+            </LinearLayout>
+
+            <ViewFlipper
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ownerLinearLayout"
+                loading:state="@{viewModel.loadingState}">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ownerLinearLayout">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="@dimen/regular_margin"
+                        android:text="@{viewModel.description}"
+                        android:textStyle="bold"
+                        android:visibility="@{viewModel.descriptionVisibility}" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_margin"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:drawablePadding="@dimen/activity_horizontal_margin"
+                        android:gravity="center_vertical"
+                        android:text="@{viewModel.date}"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_date" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_margin"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:drawablePadding="@dimen/activity_horizontal_margin"
+                        android:gravity="center_vertical"
+                        android:text="@{viewModel.likeStats.toString()}"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_heart" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_margin"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:drawablePadding="@dimen/activity_horizontal_margin"
+                        android:gravity="center_vertical"
+                        android:text="@{viewModel.downloadStats.toString()}"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_file_download" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/regular_margin"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:drawablePadding="@dimen/activity_horizontal_margin"
+                        android:gravity="center_vertical"
+                        android:text="@{viewModel.color}"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_palette" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:clipToPadding="false"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="3"
+                        gallery:photos="@{viewModel.photos}"
+                        gallery:navigation="@{router}"
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </ViewFlipper>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
