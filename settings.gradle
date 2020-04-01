@@ -1,0 +1,3 @@
+rootProject.name='AppGallery'
+include ':app'
+include ':domain'
